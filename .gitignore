@@ -1,0 +1,15 @@
+/backend/WebAPI_UtalcaBus/bin
+# Default ignored files
+/backend/WebAPI_UtalcaBus/shelf/
+/backend/WebAPI_UtalcaBus/workspace.xml
+# Rider ignored files
+/backend/WebAPI_UtalcaBus/modules.xml
+/backend/WebAPI_UtalcaBus/projectSettingsUpdater.xml
+/backend/WebAPI_UtalcaBus//contentModel.xml
+/backend/WebAPI_UtalcaBus/.idea.WebAPI_UtalcaBus.iml
+# Datasource local storage ignored files
+/backend/WebAPI_UtalcaBus/dataSources/
+/backend/WebAPI_UtalcaBus/dataSources.local.xml
+/backend/WebAPI_UtalcaBus/obj
+/backend/WebAPI_UtalcaBus/appsettings.json
+/backend/WebAPI_UtalcaBus/appsettings.Developer.json
