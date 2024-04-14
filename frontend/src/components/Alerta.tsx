@@ -35,8 +35,8 @@ function Alerta({isOpen,onClose,isSuccess,mensaje}: AlertaProps) {
                             {isSuccess ? <FaRegCheckCircle className="text-green-500 h-20 w-20 mb-2" /> : <FaRegTimesCircle className="text-red-500 h-20 w-20 mb-2" />}
                             <p className="text-xl font-bold mb-6">{isSuccess ? 'Exito' : 'Error'}</p>
                             <p className="text-lg">{mensaje}</p>
-                            <button onClick={handleClose} className='bg-fondoBoton text-white text-xl px-8 py-2 rounded-xl mt-6'>
-                                Cerrar
+                            <button onClick={handleClose} className='bg-botonNaranja text-white text-xl px-8 py-2 rounded-xl mt-6'>
+                                Aceptar
                             </button>
                         </div>
                     </dialog>

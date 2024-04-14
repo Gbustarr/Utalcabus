@@ -4,7 +4,7 @@ module.exports= {
     extend: {
       colors:{
         fondoHeader:'#0cc',
-        fondoBoton:'#F29B33',
+        botonNaranja:'#F29B33',
         fondoNegro:'#272727',
         fondoCard: '#EEEEEE',
         textoCard:'#595959',

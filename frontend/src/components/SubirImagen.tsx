@@ -21,21 +21,29 @@ function SubirImagen({ onImagenChange, limpiarImagen }: SubirImagenProps) {
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files && event.target.files[0];
-    if (selectedFile && selectedFile.type.startsWith('image/') && selectedFile.size <= 1048576) { // 1MB en bytes
-      setFile(selectedFile);
-      setError(null);
-      setPreview(URL.createObjectURL(selectedFile));
-      onImagenChange(selectedFile);//se envia la imagen al componente padre
-    } else {
+    if (!selectedFile) {
+      // No se seleccionó ningún archivo
       setFile(null);
-      setError('Seleccione una imagen valida (Max: 1MB).'); //mensaje de error
       setPreview(null);
-      onImagenChange(null);//se envia la imagen como null al componente padre
+      onImagenChange(null); // se envía la imagen como null al componente padre
+      return;
     }
+    if (selectedFile.size > 1048576) {
+      // El tamaño del archivo excede el límite de 1MB
+      setFile(null);
+      setPreview(null);
+      onImagenChange(null); // se envía la imagen como null al componente padre
+      setError('La imagen es demasiado grande (Máx: 1MB).'); // mensaje de error
+      return;
+    }
+    setFile(selectedFile);
+    setError(null);
+    setPreview(URL.createObjectURL(selectedFile));
+    onImagenChange(selectedFile);
   };
 
   return (
-    <div className='flex items-center flex-col justify-center'>
+    <div className='flex items-center flex-col justify-centerm mt-2'>
         {file && (
         <div className='mb-2'>
             <div className='text-semibold text-textoCard mb-3'>Imagen: {file.name}</div>
@@ -45,8 +53,8 @@ function SubirImagen({ onImagenChange, limpiarImagen }: SubirImagenProps) {
         </div>
         )}
         <label className="relative overflow-hidden cursor-pointer w-full h-auto mt-1 max-w-60 ">
-            <button className="w-full py-2 text-md font-semibold rounded-2xl bg-fondoBoton text-white hover:bg-orange-200">{file ? 'Cambiar Imagen' : 'Subir Imagen'}</button>
-            <input type="file" onChange={handleChange} className="absolute inset-0 opacity-0 w-full h-full cursor-pointer"/>
+            <button className="w-full py-2 text-md font-semibold rounded-2xl bg-botonNaranja text-white hover:bg-orange-200">{file ? 'Cambiar Imagen' : 'Subir Imagen'}</button>
+            <input type="file" accept='.png,.jpg,.jpeg' onChange={handleChange} className="absolute inset-0 opacity-0 w-full h-full cursor-pointer"/>
         </label>
         {error && <div className="ml-6 text-red-600 font-bold text-sm">{error}</div>}
     </div>
