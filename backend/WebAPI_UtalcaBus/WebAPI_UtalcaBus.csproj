@@ -8,6 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.3" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.3"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.3" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.3">
@@ -65,11 +66,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Migrations\" />
+      <None Remove="Migrations\20240401204029_update_model" />
     </ItemGroup>
 
     <ItemGroup>
-      <None Remove="Migrations\20240401204029_update_model" />
+      <Folder Include="Migrations\" />
     </ItemGroup>
 
 </Project>
