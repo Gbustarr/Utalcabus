@@ -1,3 +1,5 @@
+import AutenticacionAdministrador from './pages/AutentiacionAdministrador';
+
 function App() {
 
   return (
@@ -9,7 +11,10 @@ function App() {
         </div>
         <div className="text-green-400">Made By konungrDRAGO2</div>
       </div>
+       {/*<AutenticacionAdministrador></AutenticacionAdministrador>*/}  // Descomentar para ver la pagina de autenticacion
+
     </>
+    
   )
 }
 
