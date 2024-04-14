@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import SubirImagen from '../components/SubirImagen';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
@@ -29,9 +29,9 @@ function RegistroBus() {
     const [nombreBus, setNombreBus] = useState('');
     const [isChecked, setIsChecked] = useState(true);
     const [matricula, setMatricula] = useState('');
-    const [isOpenAlerta, setIsOpenAlerta] = useState(false);
-    const [alertaExito, setAlertaExito] = useState(true);
-    const [alertaMensaje, setAlertaMensaje] = useState('');
+    const [isOpenAlerta, setIsOpenAlerta] = useState(false);//Para abrir la alerta
+    const [alertaExito, setAlertaExito] = useState(true);//Para que sea la vista sea de exito/error
+    const [alertaMensaje, setAlertaMensaje] = useState('');//Texto que acompaña a la alerta
     const [nombreBusError, setNombreBusError] = useState('');
     const [limpiarImagen, setLimpiarImagen] = useState(false);
     const [matriculaDisplay, setMatriculaDisplay] = useState('');
@@ -39,45 +39,52 @@ function RegistroBus() {
     const [registroValido, setRegistroValido] = useState(false);
 
     const handleImagenChange = (file: File | null) => {
-        validarRegistro();
         setLimpiarImagen(false);
         setImagen(file);
         //console.log(file?.name)
     };
 
+    //para comprobar cuando se cambie la imagen , si el registro es valido y habilitar el boton registro
+    useEffect(() => {
+      if (imagen) {
+        validarRegistro();
+      } else {
+        validarRegistro();
+      }
+    }, [imagen]);
+
     const handleRegistroClick = (event: React.FormEvent) => {
       event.preventDefault();
       setIsOpenAlerta(true);
       validarRegistro();
-      if(imagen !== null){
-        if (1 > 0) {
-            setAlertaExito(true);
-            setAlertaMensaje('Registro exitoso.');
-            console.log(nombreBus);
-            console.log(matricula);
-            console.log(imagen.name);
-            console.log(isChecked);
-        } else {
-            setAlertaExito(false);
-            setAlertaMensaje('Error al registrar el bus.');
-        }
-      }
-      else{
-        setAlertaExito(false);
-        setAlertaMensaje('Ha ocurrido un error con la imagen , subela nuevamente.');
+      console.log(nombreBus);
+      console.log(matricula);
+      console.log(imagen?.name);
+      console.log(isChecked);
+      //Logica para subir y tener respuestas del backend aqui
+
+      //comprobar si el registro fue exitoso en backend y emitir alertas
+      if (1 > 0) {
+          setAlertaExito(true);
+          setAlertaMensaje('Registro exitoso.');
+      } else {
+          setAlertaExito(false);
+          setAlertaMensaje('Error al registrar el bus.');
       }
     };
 
+    //al cancelar , muestra alerta y redirige a la pagina anterior (por ahora solo recarga la pagina , cambiar a futuro)
     const handleCancelarClik = (event: React.FormEvent) => {
       event.preventDefault();
       setIsOpenAlerta(true);
       setAlertaExito(false);
-      setAlertaMensaje('Has cancelado el registro');
+      setAlertaMensaje('Has cancelado el registro.');
       setTimeout(() => {
         window.location.reload();
       }, 3000); // 3000 milisegundos = 3 segundos
     };
 
+    //se vacian todos los campos del formulario , y los errores
     const handleLimpiarClick = (event: React.FormEvent) => {
       setImagen(null);
       setLimpiarImagen(true);
@@ -94,6 +101,7 @@ function RegistroBus() {
       setAlertaMensaje('Se limpiaron los campos.');
     };
 
+    //validacion de matricula
     const handleChangeMatricula = (event: React.ChangeEvent<HTMLInputElement>) => {
       const value = event.target.value.trim().toUpperCase(); // Convertir a mayúsculas y eliminar espacios en blanco al inicio y al final
       setMatriculaDisplay(value);
@@ -103,12 +111,13 @@ function RegistroBus() {
   
       const matriculaRegex = /^([A-Z]{2}-?\d{2}-?\d{2}|[A-Z]{2}-?\d{4}|[A-Z]{4}-?\d{2}|[A-Z]{4}\d{2})$/;
       if (!matriculaRegex.test(formattedValue)) {
-        setMatriculaError('Formato de matrícula no válido.');
+        setMatriculaError('Formato de matrícula no válido.'); //mensaje de error que se muestra
       } else {
         setMatriculaError('');
       }
     };
 
+    //se validan que los campos sean validos
     const validarRegistro = () => {
       if (nombreBus && !nombreBusError && matricula && !matriculaError && imagen != null) {
         setRegistroValido(true);
@@ -116,15 +125,16 @@ function RegistroBus() {
         setRegistroValido(false);
       }
     };
-
+    //cuando se cierra la alerta (hijo) , cambia el estado aqui en el padre
     const handleCloseAlerta = () => {
       setIsOpenAlerta(false);
     };
+
   return (
     <div className='h-screen flex flex-col justify-between'>
         <NavBar/>
         <div className='px-6 py-6 text-textoCard'>
-            <form className="mx-auto bg-fondoCard h-auto py-4 px-4 rounded-xl flex flex-col drop-shadow-md md:max-w-3xl">
+            <form className="mx-auto bg-fondoCard h-auto py-4 px-4 rounded-xl flex flex-col drop-shadow-md max-w-2xl">
                 <span className='py-4 font-bold text-3xl text-center'>Registro De Bus</span>
                 <div className='flex flex-col mt-2'>
                     <div className="mb-5">
@@ -135,7 +145,7 @@ function RegistroBus() {
                                     const value = e.target.value;
                                     setNombreBus(value);
                                     if (value.length > 90) {
-                                        setNombreBusError('El nombre del bus no puede tener más de 90 caracteres.');
+                                        setNombreBusError('El nombre del bus no puede tener más de 90 caracteres.'); //mensaje de error que se muestra
                                     } else {
                                         setNombreBusError('');
                                     }
@@ -182,7 +192,7 @@ function RegistroBus() {
                     </div>
                 </div>
             </form>
-            <Alerta isOpen={isOpenAlerta} onClose={handleCloseAlerta} isSuccess={alertaExito} mensaje={alertaMensaje} />
+            <Alerta isOpen={isOpenAlerta} onClose={handleCloseAlerta} isSuccess={alertaExito} mensaje={alertaMensaje} /> 
         </div>
         <Footer/>
     </div>

@@ -10,6 +10,7 @@ function SubirImagen({ onImagenChange, limpiarImagen }: SubirImagenProps) {
   const [error, setError] = useState<string | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
 
+  // si limpiar imagen cambia desde el componente padre , la imagen se limpia aqui
   useEffect(() => {
     if (limpiarImagen) {
       setFile(null);
@@ -24,17 +25,17 @@ function SubirImagen({ onImagenChange, limpiarImagen }: SubirImagenProps) {
       setFile(selectedFile);
       setError(null);
       setPreview(URL.createObjectURL(selectedFile));
-      onImagenChange(selectedFile);
+      onImagenChange(selectedFile);//se envia la imagen al componente padre
     } else {
       setFile(null);
-      setError('Seleccione una imagen valida (Max: 1MB)');
+      setError('Seleccione una imagen valida (Max: 1MB).'); //mensaje de error
       setPreview(null);
-      onImagenChange(null);
+      onImagenChange(null);//se envia la imagen como null al componente padre
     }
   };
 
   return (
-    <div className='flex items-center flex-col'>
+    <div className='flex items-center flex-col justify-center'>
         {file && (
         <div className='mb-2'>
             <div className='text-semibold text-textoCard mb-3'>Imagen: {file.name}</div>
@@ -43,11 +44,11 @@ function SubirImagen({ onImagenChange, limpiarImagen }: SubirImagenProps) {
                 </div>
         </div>
         )}
-        <label className="relative overflow-hidden cursor-pointer w-full h-auto mt-1">
+        <label className="relative overflow-hidden cursor-pointer w-full h-auto mt-1 max-w-60 ">
             <button className="w-full py-2 text-md font-semibold rounded-2xl bg-fondoBoton text-white hover:bg-orange-200">{file ? 'Cambiar Imagen' : 'Subir Imagen'}</button>
             <input type="file" onChange={handleChange} className="absolute inset-0 opacity-0 w-full h-full cursor-pointer"/>
         </label>
-        {error && <div className="text-red-600 font-bold text-sm">{error}</div>}
+        {error && <div className="ml-6 text-red-600 font-bold text-sm">{error}</div>}
     </div>
   );
 }

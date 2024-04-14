@@ -9,13 +9,15 @@ interface AlertaProps {
 
 function Alerta({isOpen,onClose,isSuccess,mensaje}: AlertaProps) {
     const dialogRef = useRef<HTMLDialogElement>(null);
-        
+    
+    //que se abra la alerta si el padre le avisa
     useEffect(() => {
         if (isOpen) {
             dialogRef.current?.showModal();
         }
     }, [isOpen, onClose]);
 
+    //le avisa al componente padre de que se cerro
     const handleClose = () => {
         dialogRef.current?.close();
         onClose();
