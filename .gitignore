@@ -13,3 +13,9 @@
 /backend/WebAPI_UtalcaBus/obj
 /backend/WebAPI_UtalcaBus/appsettings.json
 /backend/WebAPI_UtalcaBus/appsettings.Developer.json
+/backend/WebAPI_UtalcaBus/.idea/*.dir
+/.idea
+/backend/.idea
+/backend/WebAPI_UtalcaBus/Migrations
+/backend/WebAPI_UtalcaBus/.env
+.DS_Store
