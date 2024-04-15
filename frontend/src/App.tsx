@@ -1,8 +1,8 @@
-import RegistroBus from "./pages/RegistroBus"
+import ListadoBuses from "./pages/ListadoBuses"
 function App() {
   return (
     <>
-      <RegistroBus/>
+      <ListadoBuses/>
     </>
   )
 }
