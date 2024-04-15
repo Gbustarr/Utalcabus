@@ -3,12 +3,15 @@ module.exports= {
   theme: {
     extend: {
       colors:{
-        fondoHeader:'#60CDCD',
-        fondoTarjeta:'#F4F4F4',
-        botonNaranja:'#F29B33'
+        fondoHeader:'#0cc',
+        botonNaranja:'#F29B33',
+        fondoNegro:'#272727',
+        fondoCard: '#EEEEEE',
+        textoCard:'#595959',
       },
     },
   },
   plugins: [],
+
 }
 
