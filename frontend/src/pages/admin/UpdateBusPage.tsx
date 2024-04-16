@@ -8,7 +8,7 @@ import { UploadImage } from '../../components/admin/bus/UploadImage';
 const MAX_SIZE_IMAGE = 1048576;
 
 const INITIAL_DATA = {
-  busName: 'Bus del sexo',
+  busName: 'Bus de oración',
   matricula: 'XXXX69',
   isChecked: true,
   imagen: null

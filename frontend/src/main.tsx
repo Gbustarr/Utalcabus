@@ -8,14 +8,15 @@ import ListadoBuses from "./pages/ListadoBuses.tsx";
 import RegistroBus from "./pages/RegistroBus.tsx";
 import TemporalRouter from "./pages/TemporalRouter.tsx";
 import AutenticacionAdmin from "./pages/AutenticacionAdministrador.tsx";
+import { UpdateBusPage } from "./pages/admin/UpdateBusPage.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <TemporalRouter />,
-    children: [
+  },
       {
-        path: "/Admin",
+        path: "/admin",
         element: <AutenticacionAdmin />,
       },
       {
@@ -26,12 +27,12 @@ const router = createBrowserRouter([
         path: "/registrobus",
         element: <RegistroBus />,
       },
-    ],
-  },
+      {
+        path: "/actualizarbus",
+        element: <UpdateBusPage />,
+      },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+  <RouterProvider router={router} />
 );
