@@ -1,0 +1,77 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="DotNetEnv" Version="3.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.3" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.3"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.3" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.3">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.2" />
+        <PackageReference Include="Riok.Mapperly" Version="3.4.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Entities\Conductor.cs" />
+      <Compile Remove="Migrations\20240327011020_db_model-v2.cs" />
+      <Compile Remove="Migrations\20240327011020_db_model-v2.Designer.cs" />
+      <Compile Remove="Migrations\20240327012919_db_model-v3.cs" />
+      <Compile Remove="Migrations\20240327012919_db_model-v3.Designer.cs" />
+      <Compile Remove="Migrations\20240325012131_Initial.cs" />
+      <Compile Remove="Migrations\20240325012131_Initial.Designer.cs" />
+      <Compile Remove="Migrations\20240327141159_timestamp_como_string.cs" />
+      <Compile Remove="Migrations\20240327141159_timestamp_como_string.Designer.cs" />
+      <Compile Remove="Migrations\20240326030738_db_model-v1.cs" />
+      <Compile Remove="Migrations\20240326030738_db_model-v1.Designer.cs" />
+      <Compile Remove="Migrations\20240327141545_timestamp_como_string-v2.cs" />
+      <Compile Remove="Migrations\20240327141545_timestamp_como_string-v2.Designer.cs" />
+      <Compile Remove="Migrations\20240327143035_timestamp_como_string-v3.cs" />
+      <Compile Remove="Migrations\20240327143035_timestamp_como_string-v3.Designer.cs" />
+      <Compile Remove="Migrations\20240327144600_db_model-v2.cs" />
+      <Compile Remove="Migrations\20240327144600_db_model-v2.Designer.cs" />
+      <Compile Remove="Migrations\20240327145109_Initial.cs" />
+      <Compile Remove="Migrations\20240327145109_Initial.Designer.cs" />
+      <Compile Remove="Migrations\PostgresContextModelSnapshot.cs" />
+      <Compile Remove="Migrations\20240327151857_Initial.cs" />
+      <Compile Remove="Migrations\20240327151857_Initial.Designer.cs" />
+      <Compile Remove="Migrations\20240327230730_db_model-v1.cs" />
+      <Compile Remove="Migrations\20240327230730_db_model-v1.Designer.cs" />
+      <Compile Remove="Migrations\20240401204136_update_table_imagen.cs" />
+      <Compile Remove="Migrations\20240401204136_update_table_imagen.Designer.cs" />
+      <Compile Remove="Migrations\20240401204523_Initial.cs" />
+      <Compile Remove="Migrations\20240401204523_Initial.Designer.cs" />
+      <Compile Remove="Migrations\20240403214642_Initial.cs" />
+      <Compile Remove="Migrations\20240403214642_Initial.Designer.cs" />
+      <Compile Remove="Migrations\20240403221628_Initial.cs" />
+      <Compile Remove="Migrations\20240403221628_Initial.Designer.cs" />
+      <Compile Remove="Migrations\20240403223939_Initial.cs" />
+      <Compile Remove="Migrations\20240403223939_Initial.Designer.cs" />
+      <Compile Remove="Migrations\20240404000344_Initial.cs" />
+      <Compile Remove="Migrations\20240404000344_Initial.Designer.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Migrations\20240401204029_update_model" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Migrations\" />
+    </ItemGroup>
+
+</Project>
