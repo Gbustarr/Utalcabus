@@ -54,7 +54,11 @@ public class BusController: Controller
         {
             return Conflict("Ya existe un bus con esa patente");
         }
-        
+        var existeImagen = await _postgresContext.imagen.FindAsync(bus.imagen_id);
+		if (existeImagen is null)
+        {
+            return NotFound("Imagen no encontrada");
+        }
         _postgresContext.bus.Add(bus);
         await _postgresContext.SaveChangesAsync();
 
