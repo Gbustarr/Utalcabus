@@ -22,6 +22,7 @@ Content-Type: application/json
   "tipo_archivo": "jpg"
 }
 
+### OBTENER EL ID DE LA IMAGEN PARA HACER LAS PRUEBAS Y CAMBIAR ABAJO
 ### POST BUS
 POST http://localhost:5195/api/Bus
 Content-Type: application/json
@@ -30,9 +31,22 @@ Content-Type: application/json
   "nombre": "Bus Huevito Rey",
   "patente": "SGJM21",
   "habilitado": true,
-  "imagen_id": "acd81167-d5a9-4278-bdfe-3450c017fb21"
+  "imagen_id": "9f9ef412-80e9-4cfd-b3c9-c9e58ab3beca"
 }
 
+### AQUI ES UNA PRUEBA CON UN ID DE UNA IMAGEN QUE NO EXISTE
+### POST BUS
+POST http://localhost:5195/api/Bus
+Content-Type: application/json
+
+{
+  "nombre": "Bus Huevito Rey",
+  "patente": "SGJM11",
+  "habilitado": true,
+  "imagen_id": "9f9ef412-80e9-4cfd-b3c9-c9e58ab3beca"
+}
+
+### DATOS NO VALIDOS
 ### POST BUS
 POST http://localhost:5195/api/Bus
 Content-Type: application/json
@@ -51,7 +65,7 @@ Content-Type: application/json
 {
   "nombre": "Bus Loco Rene",
   "patente": "SGJM20",
-"habilitado": true
+  "habilitado": true
 }
 
 ### POST BUS PATENTE IGUAL A OTRO REGISTRO 
