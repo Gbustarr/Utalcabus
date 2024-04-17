@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using WebAPI_UtalcaBus.Config;
 using WebAPI_UtalcaBus.Context;
 using DotNetEnv;
+using WebAPI_UtalcaBus.Entities;
 
 Env.Load(); 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,10 +25,11 @@ builder.Services.Configure<IdentityOptions>(options =>
 
 builder.Services.AddAuthentication().AddBearerToken(IdentityConstants.BearerScheme);
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-    .AddEntityFrameworkStores<PostgresContext>().AddApiEndpoints()
-    .AddDefaultTokenProviders();
 
+builder.Services.AddIdentity<Usuario, IdentityRole>()
+    .AddEntityFrameworkStores<PostgresContext>()
+    .AddDefaultTokenProviders();
+    
 var app = builder.Build();
 
 
@@ -35,7 +37,7 @@ using (var scope = app.Services.CreateScope())
 {
     
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<Usuario>>();
 
     // Crear roles si no existen
     foreach (var roleName in new[] { RolesConfig.AdministradorRole, RolesConfig.ConductorRole, RolesConfig.PasajeroRole })
@@ -53,16 +55,23 @@ using (var scope = app.Services.CreateScope())
     if (usuariosAdministradores.Count == 0)
     {
         System.Console.WriteLine("PROGRAM.CS => No existe un usuario administrador");
-        var defaultAdmin = "administrador@utalcabus.cl";
         var contrasena = builder.Configuration["CONTRASENA_ADMIN"];
    
         if (!string.IsNullOrEmpty(contrasena))
         {
-            var existeAdmin = await userManager.FindByNameAsync(defaultAdmin);
-            if (existeAdmin == null)
-            {
-                var nuevoUsuarioAdmin = new IdentityUser { UserName = defaultAdmin };
-                var resultado = await userManager.CreateAsync(nuevoUsuarioAdmin, contrasena);
+           
+                var nuevoUsuarioAdmin = new Usuario
+                {
+                    UserName = "Administrador",
+                    Email = "administrador@utalcabus.cl",
+                    habilitado = true,
+                };
+                
+                var resultado = await userManager.CreateAsync(
+                    nuevoUsuarioAdmin,
+                    contrasena
+                );
+                
                 if (resultado.Succeeded)
                 {
                     await userManager.AddToRoleAsync(nuevoUsuarioAdmin, "Administrador");
@@ -72,7 +81,7 @@ using (var scope = app.Services.CreateScope())
                 {
                     Console.WriteLine("PROGRAM.CS => Error en la contraseña");
                 }
-            }
+            
         }
     }
     else
@@ -90,7 +99,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.MapGroup("/identity").MapIdentityApi<IdentityUser>();
+//app.MapGroup("/identity").MapIdentityApi<IdentityUser>();
 
 app.UseHttpsRedirection();
 app.MapControllers();

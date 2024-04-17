@@ -12,7 +12,7 @@
 /backend/WebAPI_UtalcaBus/dataSources.local.xml
 /backend/WebAPI_UtalcaBus/obj
 /backend/WebAPI_UtalcaBus/appsettings.json
-/backend/WebAPI_UtalcaBus/appsettings.Developer.json
+/backend/WebAPI_UtalcaBus/appsettings.Development.json
 /backend/WebAPI_UtalcaBus/.idea/*.dir
 /.idea
 /backend/.idea

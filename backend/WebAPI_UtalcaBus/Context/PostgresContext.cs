@@ -4,7 +4,7 @@ using WebAPI_UtalcaBus.Entities;
 
 namespace WebAPI_UtalcaBus.Context;
 
-public class PostgresContext: IdentityDbContext
+public class PostgresContext: IdentityDbContext<Usuario>
 {
     public PostgresContext(DbContextOptions<PostgresContext> options): base(options)
     {
